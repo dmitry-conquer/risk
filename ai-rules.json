@@ -1,0 +1,245 @@
+{
+  "project": {
+    "name": "Rick's AC Maintenance & Service LLC",
+    "type": "HVAC service landing page",
+    "stack": ["Vite", "Tailwind CSS v4", "Alpine.js", "TypeScript", "Handlebars"]
+  },
+
+  "styling": {
+    "framework": "Tailwind CSS v4",
+    "rule": "Use only utility classes provided by Tailwind. Do NOT create custom CSS classes, custom component classes, or named abstractions in stylesheets.",
+    "allowed": [
+      "Tailwind utility classes directly in HTML (e.g., flex, gap-4, text-lg, bg-white)",
+      "Tailwind variants: responsive (sm:, md:, lg:, xl:), state (hover:, focus:, active:), dark mode (dark:)",
+      "@apply is forbidden — write utilities inline only",
+      "CSS custom properties (variables) inside :root via @theme in main.css for design tokens only (colors, fonts)",
+      "Minimal @layer base for resets or global element defaults if absolutely necessary"
+    ],
+    "forbidden": [
+      "Custom class names like .card, .btn, .hero, .section-title",
+      "@apply directive",
+      "Inline style= attributes unless driven by Alpine.js dynamic binding",
+      "External CSS files beyond src/styles/main.css",
+      "Arbitrary values unless no standard scale value fits (e.g., w-[347px] is a last resort)"
+    ]
+  },
+
+  "javascript": {
+    "framework": "Alpine.js",
+    "rule": "All interactivity must be handled with Alpine.js directives directly in HTML. Avoid writing separate JS logic files for UI behavior unless absolutely necessary (e.g., third-party library initialization).",
+    "patterns": {
+      "state": "x-data on the nearest logical parent element",
+      "binding": "x-bind or shorthand :attr for dynamic attributes",
+      "events": "x-on or shorthand @event for event listeners",
+      "conditionals": "x-show (preferred for toggle) or x-if (for true conditional rendering)",
+      "loops": "x-for with :key",
+      "text": "x-text for dynamic text content",
+      "transitions": "x-transition for enter/leave animations",
+      "refs": "$refs for direct element access",
+      "stores": "$store (Alpine.store) for shared state across components"
+    },
+    "forbidden": [
+      "document.querySelector / getElementById for UI manipulation",
+      "jQuery or any DOM-manipulation library",
+      "Inline onclick= or other legacy event handlers"
+    ]
+  },
+
+  "responsiveness": {
+    "rule": "Every layout and component must be fully responsive across all breakpoints. Mobile-first approach is required.",
+    "breakpoints": {
+      "default": "mobile (< 640px)",
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px",
+      "xl": "1280px",
+      "2xl": "1536px"
+    },
+    "requirements": [
+      "Start styling for mobile, then add md: / lg: overrides",
+      "Navigation must collapse to a hamburger menu on mobile (Alpine.js toggle)",
+      "Grid layouts must stack vertically on mobile (grid-cols-1) and expand on larger screens",
+      "Typography must scale appropriately (text-base mobile, text-lg+ desktop)",
+      "Touch targets must be at least 44x44px",
+      "Images must use w-full or max-w-* with responsive aspect ratios"
+    ]
+  },
+
+  "design": {
+    "philosophy": "Clean, professional, and modern. Prioritize whitespace, clarity, and trust. This is a service business — the design must convey reliability and local expertise.",
+    "inspiration": {
+      "folder": "design-examples/",
+      "files": {
+        "guttrdone.webp": "Local gutter service site. Key patterns: dark navy/teal hero with large bold white uppercase headline; social proof badges (Google/Facebook star ratings) placed top-left of hero; circular/rounded image cutout floated to the right in the hero; two CTA buttons side-by-side (primary solid, secondary accent color); inline trust-points row below headline using small icons + short text; service cards with full-width image, rounded-bottom overlay with dark background and title, plus a CTA button at the bottom.",
+        "leith-heating-cooling.webp": "HVAC service site — closest match to this project. Key patterns: full-width hero photograph (service van on location) as background; angled/chevron-shaped semi-transparent overlay on the left containing headline and two CTA buttons; bold orange accent bar directly below hero with 4 icon+text trust badges in a row; services section on a teal dotted-pattern background; service cards with white background, top photo, centered heading, short description, and orange CTA button."
+      },
+      "apply": [
+        "Hero must have a strong, high-contrast background (dark overlay on photo, or solid dark teal/navy)",
+        "Place a trust-badge strip (4 items with icons) immediately below the hero — use an accent color background (e.g., orange or red-orange) to make it pop",
+        "Service cards follow the image-top / title / description / CTA-button pattern",
+        "Use two visually distinct CTA button styles: primary (solid, brand color) and secondary (outlined or contrasting fill)",
+        "Navigation must show a prominent phone number CTA button on the right side (desktop)",
+        "Color palette: dark navy or teal as primary, red-orange or amber as accent, white for text on dark backgrounds",
+        "Section headings should be bold and use tracking-wide or uppercase for a strong, trustworthy feel"
+      ]
+    },
+    "color_palette": {
+      "primary": "Dark navy or dark teal (e.g., #0a2540 or #0f4c6e) — used for hero, header, and dark sections",
+      "accent": "Red-orange or amber (e.g., #e84c1e or #f59e0b) — used for CTA buttons, highlight bars, and hover states",
+      "neutral_light": "Slate-50 or gray-100 — used for alternating section backgrounds",
+      "text_on_dark": "White or gray-100",
+      "text_on_light": "Gray-800 or gray-900"
+    },
+    "images": {
+      "source": "Use images from public/images/ for all visual content. Do not use external image URLs or placeholder services.",
+      "optimization": "Always include width and height attributes on img tags. Use loading='lazy' for below-the-fold images. Use loading='eager' for hero/above-the-fold images."
+    },
+    "typography": {
+      "hierarchy": "Maintain clear H1 → H2 → H3 hierarchy. Only one H1 per page.",
+      "readability": "Body text minimum text-base (16px). Line height leading-relaxed for paragraphs.",
+      "headings": "Section headings should be font-bold or font-extrabold, with tracking-wide. Hero H1 should be text-4xl md:text-5xl lg:text-6xl."
+    },
+    "components": [
+      "Use rounded corners (rounded-xl or rounded-2xl) for cards and containers",
+      "Use subtle shadows (shadow-md or shadow-lg) for depth — avoid harsh or flat styles",
+      "Buttons must have clear hover and focus states — use transition and duration-200 for smooth transitions",
+      "Section backgrounds should alternate (white / slate-50 / dark) to create visual rhythm",
+      "Trust-badge strip below hero: flex row, icon + short label per badge, accent background, full-width",
+      "Service cards: overflow-hidden rounded-2xl shadow-lg, img on top (aspect-video object-cover), content area with padding, CTA button at bottom"
+    ]
+  },
+
+  "structure": {
+    "rule": "The page must be divided into clearly named semantic HTML sections. Each section maps to a content block from the content file.",
+    "sections": [
+      {
+        "id": "hero",
+        "tag": "<section>",
+        "aria-label": "Hero",
+        "content": "Main headline, subheadline, and primary CTA from content-homepage.md"
+      },
+      {
+        "id": "about",
+        "tag": "<section>",
+        "aria-label": "About Rick's AC",
+        "content": "Company introduction paragraph"
+      },
+      {
+        "id": "why-choose-us",
+        "tag": "<section>",
+        "aria-label": "Why Choose Us",
+        "content": "4 trust/value pillars (18 years experience, complete care, customer-focused, local)"
+      },
+      {
+        "id": "services",
+        "tag": "<section>",
+        "aria-label": "Our Services",
+        "content": "6 service cards: Heating Installation, AC Installation, Heating Repair, AC Repair, Maintenance, Indoor Air Quality"
+      },
+      {
+        "id": "brands",
+        "tag": "<section>",
+        "aria-label": "Brands We Service",
+        "content": "Logo or text list of supported brands"
+      },
+      {
+        "id": "cta",
+        "tag": "<section>",
+        "aria-label": "Call to Action",
+        "content": "Comfort starts here — CTA to contact"
+      },
+      {
+        "id": "contact",
+        "tag": "<section>",
+        "aria-label": "Contact Information",
+        "content": "Address, phones, email"
+      },
+      {
+        "id": "credentials",
+        "tag": "<section>",
+        "aria-label": "Licenses and Payment",
+        "content": "License numbers and accepted payment methods"
+      }
+    ],
+    "layout": {
+      "header": "Sticky navigation with logo, phone number (visible on desktop), and mobile hamburger menu",
+      "footer": "Company name, quick links, contact info, license info"
+    }
+  },
+
+  "content": {
+    "source": "All copy must come from content-*.md files in the project root. Do not invent or paraphrase content.",
+    "files": {
+      "content-homepage.md": "All text for the homepage sections"
+    },
+    "rule": "If a content-*.md file does not cover a specific element (e.g., a button label), use short, clear, and professional English phrasing consistent with the existing content tone."
+  },
+
+  "seo": {
+    "requirements": [
+      "One <h1> per page — must match the primary page topic",
+      "Descriptive <title> tag: '[Page Topic] | Rick's AC Maintenance & Service LLC'",
+      "<meta name='description'> — 150-160 characters, includes primary keyword and location",
+      "Semantic HTML: use <header>, <nav>, <main>, <section>, <footer>, <article> appropriately",
+      "All images must have descriptive alt attributes",
+      "Internal anchor links must use descriptive text (not 'click here')",
+      "Use <address> tag for contact/location information",
+      "Structured data (JSON-LD) for LocalBusiness schema in <head>"
+    ]
+  },
+
+  "accessibility": {
+    "standard": "WCAG 2.1 AA minimum",
+    "requirements": [
+      "All interactive elements must be keyboard-accessible",
+      "Focus styles must be visible — never use outline-none without a custom focus-visible: replacement",
+      "Color contrast ratio: 4.5:1 for normal text, 3:1 for large text",
+      "All form inputs must have associated <label> elements",
+      "Modals and drawers must trap focus and be closeable with Escape key",
+      "Use aria-label or aria-labelledby on landmark regions that lack a visible heading",
+      "Use role='button' + tabindex='0' if a non-button element is interactive",
+      "Skip-to-main-content link as the first focusable element in <body>",
+      "Navigation toggle button must have aria-expanded and aria-controls attributes"
+    ]
+  },
+
+  "code_quality": {
+    "html": [
+      "Validate that HTML is well-formed — no unclosed tags",
+      "Avoid deeply nested div-soup — prefer semantic elements",
+      "Comments are allowed for section demarcation (<!-- SECTION: Hero -->)"
+    ],
+    "components": [
+      "Reuse Handlebars partials in components/ for repeated structures (header, footer, modal)",
+      "Keep components focused — one responsibility per partial"
+    ],
+    "performance": [
+      "Minimize JavaScript — Alpine.js handles UI; avoid loading heavy libraries",
+      "Use Vite's build pipeline — do not add scripts via CDN links in production HTML",
+      "Lazy-load images below the fold"
+    ]
+  },
+
+  "workflow": {
+    "before_starting": [
+      "Read the relevant content-*.md file to understand the copy",
+      "Review images in public/images/ to understand available visuals",
+      "Check design-examples/ for visual direction",
+      "Read existing components in components/ before creating new ones"
+    ],
+    "when_building_a_section": [
+      "Write semantic HTML first",
+      "Apply Tailwind utilities for layout and spacing",
+      "Add Alpine.js x-data only if the section has interactive state",
+      "Verify responsive behavior at mobile, md, and lg breakpoints",
+      "Check accessibility: alt text, aria attributes, keyboard access"
+    ],
+    "do_not": [
+      "Add custom CSS classes",
+      "Use @apply",
+      "Invent content not present in content-*.md",
+      "Use images from external URLs",
+      "Break section structure without updating this file"
+    ]
+  }
+}
